@@ -1,0 +1,467 @@
+// Cortex global styles.
+// Carbon's white theme provides the IBM Plex / IBM Blue / sharp-corner base;
+// we override a few tokens to match docs/Ui/developer_journal_design_system.
+
+@use "@carbon/react/scss/themes";
+@use "@carbon/react/scss/theme" with ($theme: themes.$white);
+@use "@carbon/react";
+
+// ---------- design-token overrides ----------------------------------------
+// The "Cortex Soft" palette has a near-white background (#faf8ff) instead of
+// pure white. Layered surfaces stay white so foreground content reads cleanly.
+
+:root {
+  --cds-background: #faf8ff;
+  --cds-layer: #ffffff;
+  --cds-layer-accent: #f2f3ff;
+  --cds-layer-active: #e7e7f4;
+  --cds-border-subtle: #e1e1ee;
+  --cds-border-strong: #c3c6d8;
+  --cds-text-primary: #191b24;
+  --cds-text-secondary: #424656;
+  --cds-text-on-color: #ffffff;
+  --cds-link-primary: #0052dd;
+  --cds-link-primary-hover: #003da9;
+  --cds-button-primary: #0f62fe;
+  --cds-button-primary-hover: #0050e6;
+  --cds-focus: #0f62fe;
+  --cds-support-success: #198038;
+  --cds-support-warning: #f1c21b;
+  --cds-support-error: #da1e28;
+
+  // Cortex semantic tokens (used by inline styles in feature pages)
+  --cortex-surface: #faf8ff;
+  --cortex-surface-container: #ecedfa;
+  --cortex-surface-container-low: #f2f3ff;
+  --cortex-surface-container-lowest: #ffffff;
+  --cortex-surface-container-high: #e7e7f4;
+  --cortex-on-surface: #191b24;
+  --cortex-on-surface-variant: #424656;
+  --cortex-outline: #737687;
+  --cortex-outline-variant: #c3c6d8;
+  --cortex-primary: #0f62fe;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: var(--cortex-surface);
+  color: var(--cortex-on-surface);
+  font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code,
+pre,
+.cortex-mono {
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+// ---------- Material Symbols ---------------------------------------------
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+// ---------- responsive layout helpers -------------------------------------
+
+.cortex-page {
+  padding: 24px 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    padding: 32px 24px;
+  }
+}
+
+.cortex-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cortex-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 960px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ---------- mobile-first nav --------------------------------------------
+// Carbon's HeaderNavigation hides at < 1056px by default. We add a
+// bottom-tab nav for narrow viewports to keep the most-used sections one
+// thumb-tap away.
+
+.cortex-bottom-nav {
+  display: none;
+  position: fixed;
+  inset: auto 0 0 0;
+  background: var(--cortex-surface-container-lowest);
+  border-top: 1px solid var(--cortex-outline-variant);
+  z-index: 9000;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+
+  @media (max-width: 1055px) {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 4px;
+    color: var(--cortex-on-surface-variant);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.32px;
+    text-transform: uppercase;
+    min-height: 56px;
+
+    &.active {
+      color: var(--cortex-primary);
+    }
+
+    .material-symbols-outlined {
+      font-size: 22px;
+      margin-bottom: 2px;
+    }
+  }
+}
+
+// Push main content above the bottom nav on mobile
+@media (max-width: 1055px) {
+  .cds--content,
+  .cortex-page {
+    padding-bottom: 88px !important;
+  }
+}
+
+// ---------- tile / button polish ----------------------------------------
+// Sharp corners (0px) per the design system. Carbon's defaults are already 0.
+
+.cds--tile {
+  border: 1px solid var(--cortex-outline-variant) !important;
+  background: var(--cortex-surface-container-lowest) !important;
+}
+
+.cortex-stat-card {
+  padding: 16px;
+  background: var(--cortex-surface-container-lowest);
+  border: 1px solid var(--cortex-outline-variant);
+
+  .label {
+    font-size: 12px;
+    letter-spacing: 0.32px;
+    text-transform: uppercase;
+    color: var(--cortex-on-surface-variant);
+    margin: 0;
+  }
+
+  .value {
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.1;
+    margin: 4px 0 0;
+  }
+}
+
+// ---------- accessibility focus rings ----------------------------------
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--cortex-primary);
+  outline-offset: 2px;
+}
+
+// ---------- global animations and transitions --------------------------
+
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+// ---------- enhanced tile styles ---------------------------------------
+
+.cds--tile {
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.cds--clickable-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+// ---------- loading states ---------------------------------------------
+
+.cortex-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--cortex-surface-container-low) 0%,
+    var(--cortex-surface-container) 50%,
+    var(--cortex-surface-container-low) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+// ---------- smooth scrolling -------------------------------------------
+
+html {
+  scroll-behavior: smooth;
+}
+
+// ---------- custom scrollbar -------------------------------------------
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cortex-surface-container-low);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cortex-outline-variant);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cortex-outline);
+}
+
+// ---------- enhanced button styles -------------------------------------
+
+.cds--btn {
+  transition: all 0.2s ease !important;
+}
+
+.cds--btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cds--btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+// ---------- enhanced tag styles ----------------------------------------
+
+.cds--tag {
+  transition: all 0.2s ease !important;
+}
+
+.cds--tag:hover {
+  transform: scale(1.05);
+}
+
+// ---------- glass morphism effect --------------------------------------
+
+.cortex-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+// ---------- gradient backgrounds ---------------------------------------
+
+.cortex-gradient-primary {
+  background: linear-gradient(135deg, var(--cortex-primary) 0%, #0043ce 100%);
+}
+
+.cortex-gradient-success {
+  background: linear-gradient(135deg, #198038 0%, #0e6027 100%);
+}
+
+.cortex-gradient-warning {
+  background: linear-gradient(135deg, #f1c21b 0%, #d4a017 100%);
+}
+
+.cortex-gradient-error {
+  background: linear-gradient(135deg, #da1e28 0%, #a2191f 100%);
+}
+
+// ---------- utility classes --------------------------------------------
+
+.cortex-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.cortex-fade-in-up {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.cortex-fade-in-down {
+  animation: fadeInDown 0.3s ease-out;
+}
+
+.cortex-slide-in-left {
+  animation: slideInLeft 0.3s ease-out;
+}
+
+.cortex-slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.cortex-scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+.cortex-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+// ---------- responsive utilities ---------------------------------------
+
+.cortex-hide-mobile {
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+.cortex-hide-desktop {
+  @media (min-width: 769px) {
+    display: none !important;
+  }
+}
+
+// ---------- text utilities ---------------------------------------------
+
+.cortex-text-gradient {
+  background: linear-gradient(135deg, var(--cortex-primary) 0%, #8a3ffc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cortex-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cortex-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cortex-truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

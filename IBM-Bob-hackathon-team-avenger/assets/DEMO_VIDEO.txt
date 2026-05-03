@@ -1,0 +1,17 @@
+CORTEX — DEMO VIDEO
+===================
+
+Public URL: https://youtube.com/shorts/mLwtA-R2Bls
+
+Local file: assets/demo.mp4
+
+Scene breakdown (see docs/VIDEO_BRIEF.md for full shot list):
+  00:00 – 00:30  Hook: the re-derivation tax problem
+  00:30 – 01:30  One-command setup (make start) + Bob MCP connect
+  01:30 – 02:30  Capture: /diary-save in Bob + Telegram voice memo
+  02:30 – 03:30  Proactive recall: open a file, Bob surfaces past entries
+  03:30 – 04:15  Agentic auto-capture: Bob proposes draft on task complete
+  04:15 – 05:00  Mobile app tour + architecture wrap-up
+
+Recording guide: docs/DEMO_RECORDING.md
+Shot list:       docs/VIDEO_BRIEF.md

@@ -1,0 +1,48 @@
+{
+  "hackathon": "IBM Bob Dev Day Hackathon 2026",
+  "team_name": "Team Avenger",
+  "project_name": "Cortex",
+  "tagline": "A developer's second brain — built 100% with IBM Bob",
+  "submission_date": "2026-05-03",
+  "demo_video_url": "https://youtube.com/shorts/mLwtA-R2Bls",
+  "repository_url": "https://github.com/equinox12311/IBM-Bob",
+  "members": [
+    {
+      "id": "M1",
+      "name": "Adeel Mukhtar",
+      "role": "AI Engineer",
+      "bob_coins_used": 14,
+      "bob_sessions": [
+        "docs/bob-sessions/m1-01-bob-extensions.txt"
+      ]
+    },
+    {
+      "id": "M2",
+      "name": "Ahmad Farooqi",
+      "role": "Backend Developer",
+      "bob_coins_used": 20,
+      "bob_sessions": [
+        "docs/bob-sessions/m2-01-backend-implementation.txt",
+        "docs/bob-sessions/m2-02-security-implementation.txt"
+      ]
+    },
+    {
+      "id": "M3",
+      "name": "Fatima Asif",
+      "role": "Frontend Developer",
+      "bob_coins_used": 10,
+      "bob_sessions": [
+        "docs/bob-sessions/m3-01-frontend-ui-components.txt"
+      ]
+    }
+  ],
+  "ibm_technologies": [
+    "IBM Bob (all 5 extension layers: MCP, mode, skill, slash commands, rules)",
+    "watsonx.ai (Granite embeddings + IBM Speech to Text)"
+  ],
+  "total_bob_coins_used": 44,
+  "total_bob_coins_available": 120,
+  "one_command_start": "make start",
+  "api_port": 8080,
+  "web_port": 8081
+}

@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Node / web
+node_modules/
+web/dist/
+web/.vite/
+.eslintcache
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Local DB / data
+*.db
+*.sqlite
+*.sqlite3
+data/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Bob (do NOT ignore the bob/ directory we ship — only local Bob state)
+.bob/cache/
+.bob/sessions/
+
+# Logs from `make start`
+.logs/
+
+# Archive of pre-cleanup notes — kept locally, never shipped
+__archive/
+
+# Local LLM weights (~1.5 GB each — never ship)
+models/
+# Large video files
+*.mp4
+demo.mp4
